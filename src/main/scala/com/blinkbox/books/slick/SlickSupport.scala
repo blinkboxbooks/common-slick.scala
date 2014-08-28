@@ -66,10 +66,11 @@ trait DatabaseSupport {
 }
 
 /**
- * Base component to be implemented for a profile-parametrized database connection. Please note that the constraintExceptionTag
- * is quite tricky and has to be implemented by instantiating the correct DBTypes implementation.
+ * Base component to be implemented for a profile-parametrized database connection. Implementations should
+ * rely on the exceptionFilter to abstract away the different exception types used in different databases
+ * (i.e. at the moment exceptions related to constraint violations)
  */
-trait BaseDatabaseComponent {
+trait DatabaseComponent {
   val DB: DatabaseSupport
   type Tables <: TablesContainer[DB.Profile]
 
@@ -83,8 +84,8 @@ trait BaseDatabaseComponent {
 /**
  * Stub for implementing repository components
  */
-trait BaseRepositoriesComponent {
-  this: BaseDatabaseComponent =>
+trait RepositoriesComponent {
+  this: DatabaseComponent =>
 }
 
 class MySQLDatabaseSupport extends DatabaseSupport {
@@ -98,7 +99,7 @@ class MySQLDatabaseSupport extends DatabaseSupport {
 class H2DatabaseSupport extends DatabaseSupport {
   type Profile = JdbcProfile
 
-  val constraintViolationCodes = Set(
+  private val constraintViolationCodes = Set(
     ErrorCode.DUPLICATE_KEY_1,
     ErrorCode.REFERENTIAL_INTEGRITY_VIOLATED_CHILD_EXISTS_1,
     ErrorCode.REFERENTIAL_INTEGRITY_VIOLATED_PARENT_MISSING_1)
