@@ -8,13 +8,16 @@ val buildSettings = Seq(
 
 val dependencySettings = Seq(
   libraryDependencies ++= {
+    val metricsV = "3.0.2"
     Seq(
       "com.typesafe.slick"        %%  "slick"                 % "2.1.0",
       "mysql"                     %   "mysql-connector-java"  % "5.1.31",
       "com.blinkbox.books"        %%  "common-scala-test"     % "0.3.0"   % "test",
       "com.h2database"            %   "h2"                    % "1.4.181",
       "joda-time"                 %   "joda-time"             % "2.4",
-      "org.joda"                  %   "joda-convert"          % "1.7"
+      "org.joda"                  %   "joda-convert"          % "1.7",
+      "com.codahale.metrics"      %   "metrics-core"          % metricsV,
+      "com.codahale.metrics"      %   "metrics-healthchecks"  % metricsV
     )
   }
 )
