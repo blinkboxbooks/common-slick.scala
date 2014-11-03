@@ -1,6 +1,6 @@
 package com.blinkbox.books.slick
 
-import java.sql.SQLException
+import java.sql.{BatchUpdateException, SQLIntegrityConstraintViolationException, SQLException}
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException
 import org.h2.api.ErrorCode
@@ -93,6 +93,7 @@ class MySQLDatabaseSupport extends DatabaseSupport {
 
   override def exceptionTransformer = {
     case ex: MySQLIntegrityConstraintViolationException => ConstraintException(ex)
+    case ex: BatchUpdateException if ex.getCause != null && ex.getCause.isInstanceOf[SQLIntegrityConstraintViolationException] => ConstraintException(ex)
   }
 }
 
