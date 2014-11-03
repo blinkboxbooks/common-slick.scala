@@ -1,5 +1,13 @@
 # Change log
 
+## 0.2.2 ([#5](https://git.mobcastdev.com/Platform/common-slick/pull/5) 2014-11-03 18:11:30)
+
+MySQL exception transformer handles more cases
+
+### Improvement
+
+Now catches integrity constraint violations caused by MySQL batch inserts.
+
 ## 0.2.1 ([#4](https://git.mobcastdev.com/Platform/common-slick/pull/4) 2014-11-03 15:34:13)
 
 H2 exception transformer handles more constraint violation cases
