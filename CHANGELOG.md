@@ -1,5 +1,13 @@
 # Change log
 
+## 0.2.1 ([#4](https://git.mobcastdev.com/Platform/common-slick/pull/4) 2014-11-03 15:34:13)
+
+H2 exception transformer handles more constraint violation cases
+
+### Improvement
+
+Constraint violations can happen on updates as well. Instead of adding another case for `org.h2.jdbc.JdbcBatchUpdateException`, I made this more general. We relied on `java.sql.SQLException.getErroCode()` anyway.
+
 ## 0.2.0 ([#3](https://git.mobcastdev.com/Platform/common-slick/pull/3) 2014-10-07 11:06:59)
 
 Added a `DatabaseHealthCheck` class
