@@ -9,9 +9,9 @@ import org.joda.time.{DateTime, DateTimeZone}
 import scala.slick.driver.JdbcProfile
 import scala.slick.profile._
 
-sealed abstract class DatabaseException[T <: SQLException](cause: T) extends Exception(cause.getMessage, cause)
-case class ConstraintException[T <: SQLException](cause: T) extends DatabaseException[T](cause)
-case class UnknownDatabaseException[T <: SQLException](cause: T) extends DatabaseException[T](cause)
+sealed abstract class DatabaseException(cause: SQLException) extends Exception(cause.getMessage, cause)
+case class ConstraintException(cause: SQLException) extends DatabaseException(cause)
+case class UnknownDatabaseException(cause: SQLException) extends DatabaseException(cause)
 
 /**
  * Utility to mix in to get type alias for classes depending on a specific slick profile
@@ -50,7 +50,7 @@ trait DatabaseSupport {
   type Database = Profile#Backend#Database
 
   // The exception transformer should be implemented to wrap db-specific exception in db-agnostic ones
-  protected type ExceptionTransformer = PartialFunction[Throwable, DatabaseException[_ <: SQLException]]
+  protected type ExceptionTransformer = PartialFunction[Throwable, DatabaseException]
   protected def exceptionTransformer: ExceptionTransformer
 
   // This lifts the exception transformer so that it is defined for any throwable in a way that transform db-specific
