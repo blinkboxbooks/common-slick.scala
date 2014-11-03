@@ -105,6 +105,6 @@ class H2DatabaseSupport extends DatabaseSupport {
     ErrorCode.REFERENTIAL_INTEGRITY_VIOLATED_PARENT_MISSING_1)
 
   override def exceptionTransformer = {
-    case ex: org.h2.jdbc.JdbcSQLException if constraintViolationCodes contains ex.getErrorCode => ConstraintException(ex)
+    case ex: SQLException if constraintViolationCodes contains ex.getErrorCode => ConstraintException(ex)
   }
 }
