@@ -60,6 +60,8 @@ trait DatabaseSupport {
   // This object should be used to catch db exceptions
   object ExceptionFilter {
     def apply(f: PartialFunction[Throwable, Throwable]) = liftedTransformer andThen f
+    // propagates the transformed exception as is
+    def default = apply { case e => e }
   }
 
   type ExceptionFilter = ExceptionFilter.type
