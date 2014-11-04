@@ -1,5 +1,13 @@
 # Change log
 
+## 0.3.0 ([#6](https://git.mobcastdev.com/Platform/common-slick/pull/6) 2014-11-03 18:26:11)
+
+Simplified exceptions to make them easier to use in tests
+
+### Breaking changes
+
+Database exceptions no longer take type parameters. Instead, the `cause` has the type used as a lower bound before.
+
 ## 0.2.2 ([#5](https://git.mobcastdev.com/Platform/common-slick/pull/5) 2014-11-03 18:11:30)
 
 MySQL exception transformer handles more cases
