@@ -17,7 +17,7 @@ class ExceptionFilterTests extends FlatSpec with FailHelper {
   "Default exception filter" should "propagate transformed database exceptions" in new TestFixture {
 
     failingWith[ConstraintException] {
-      Future.failed(new SQLException("test sql exception")).transform(identity, ExceptionFilter.default)
+      Future { throw new SQLException("test sql exception") } transform(identity, ExceptionFilter.default)
     }
   }
 
