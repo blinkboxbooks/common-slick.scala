@@ -1,5 +1,19 @@
 # Change log
 
+## 0.3.1 ([#7](https://git.mobcastdev.com/Platform/common-slick/pull/7) 2014-11-04 12:45:28)
+
+Added no-op factory method in ExceptionFilter
+
+### Improvement
+
+Useful when we are happy with the default exception transformation in `DatabaseSupport` implementation:
+
+```scala
+Future {
+  // Slick code 
+} transform(identity, exceptionFilter.default)
+```
+
 ## 0.3.0 ([#6](https://git.mobcastdev.com/Platform/common-slick/pull/6) 2014-11-03 18:26:11)
 
 Simplified exceptions to make them easier to use in tests
