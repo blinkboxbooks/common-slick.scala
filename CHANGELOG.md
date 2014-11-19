@@ -1,5 +1,14 @@
 # Change log
 
+## 0.3.2 ([#8](https://git.mobcastdev.com/Platform/common-slick/pull/8) 2014-11-19 10:36:27)
+
+Exception Filter: work with jdbc4.IntegrityConstraint
+
+patch 
+
+- Default MySQL exception filter now handles `jdbc4.MySQLIntegrityConstraintViolationException`
+- Added tests for exceptions handled by default MySQL filter. 
+
 ## 0.3.1 ([#7](https://git.mobcastdev.com/Platform/common-slick/pull/7) 2014-11-04 12:45:28)
 
 Added no-op factory method in ExceptionFilter
