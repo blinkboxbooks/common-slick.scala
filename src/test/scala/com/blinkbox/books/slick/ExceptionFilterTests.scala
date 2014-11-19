@@ -23,7 +23,7 @@ class ExceptionFilterTests extends FlatSpec with FailHelper {
     }
   }
 
-  "MySQLDatabaseSupport exception filter" should "work with com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException" in new TestFixture {
+  "MySQLDatabaseSupport exception filter" should "work with java.sql.SQLIntegrityConstraintViolationException and subclasses" in new TestFixture {
     val ex = intercept[ConstraintException] {
       mysqlDbSupport.throwEx(new JDBC4MySQLIntegrityConstraintViolation("test sql exception"))
     }
