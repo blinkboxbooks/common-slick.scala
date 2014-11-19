@@ -3,6 +3,7 @@ package com.blinkbox.books.slick
 import java.sql.{BatchUpdateException, SQLIntegrityConstraintViolationException, SQLException}
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException
+import com.mysql.jdbc.exceptions.jdbc4.{MySQLIntegrityConstraintViolationException => JDBC4MySQLIntegrityConstraintViolation}
 import org.h2.api.ErrorCode
 import org.joda.time.{DateTime, DateTimeZone}
 
@@ -95,6 +96,7 @@ class MySQLDatabaseSupport extends DatabaseSupport {
 
   override def exceptionTransformer = {
     case ex: MySQLIntegrityConstraintViolationException => ConstraintException(ex)
+    case ex: JDBC4MySQLIntegrityConstraintViolation => ConstraintException(ex)
     case ex: BatchUpdateException if ex.getCause != null && ex.getCause.isInstanceOf[SQLIntegrityConstraintViolationException] => ConstraintException(ex)
   }
 }
