@@ -95,6 +95,7 @@ class MySQLDatabaseSupport extends DatabaseSupport {
 
   override def exceptionTransformer = {
     case ex: MySQLIntegrityConstraintViolationException => ConstraintException(ex)
+    case ex: SQLIntegrityConstraintViolationException => ConstraintException(ex)
     case ex: BatchUpdateException if ex.getCause != null && ex.getCause.isInstanceOf[SQLIntegrityConstraintViolationException] => ConstraintException(ex)
   }
 }
