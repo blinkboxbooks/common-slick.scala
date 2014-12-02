@@ -1,5 +1,14 @@
 # Change log
 
+## 0.3.3 ([#9](https://git.mobcastdev.com/Platform/common-slick/pull/9) 2014-12-02 11:18:41)
+
+Updated build file & dependencies
+
+### Patch
+
+- Updated Codahale metrics dependency
+- Updated build file to latest recommended format
+
 ## 0.3.2 ([#8](https://git.mobcastdev.com/Platform/common-slick/pull/8) 2014-11-19 10:36:27)
 
 Exception Filter: work with jdbc4.IntegrityConstraint
