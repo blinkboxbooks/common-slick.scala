@@ -14,6 +14,8 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.slick.driver.JdbcProfile
 
+import scala.language.reflectiveCalls
+
 @RunWith(classOf[JUnitRunner])
 class ExceptionFilterTests extends FlatSpec with FailHelper {
 
