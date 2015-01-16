@@ -48,19 +48,19 @@ class ExceptionFilterTests extends FlatSpec with FailHelper {
   }
 
   it should "work with MySQLSyntaxErrorException" in new TestFixture {
+    val cause = new MySQLSyntaxErrorException("test mysql syntax exception")
     val ex = intercept[UnknownDatabaseException] {
-      val cause = new MySQLSyntaxErrorException("test mysql syntax exception")
       mysqlDbSupport.throwEx(cause)
     }
-    assert(ex.getMessage == "test mysql syntax exception")
+    assert(ex.getCause == cause)
   }
 
   it should "work with jdbc4.MySQLSyntaxErrorException" in new TestFixture {
+    val cause = new jdbc4.MySQLSyntaxErrorException("Table 'foo.bars' doesn't exist")
     val ex = intercept[UnknownDatabaseException] {
-      val cause = new jdbc4.MySQLSyntaxErrorException("Table 'foo.bars' doesn't exist")
       mysqlDbSupport.throwEx(cause)
     }
-    assert(ex.getMessage == "Table 'foo.bars' doesn't exist")
+    assert(ex.getCause == cause)
   }
 
   class TestFixture extends DatabaseSupport {

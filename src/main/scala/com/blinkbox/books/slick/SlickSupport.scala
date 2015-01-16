@@ -2,7 +2,6 @@ package com.blinkbox.books.slick
 
 import java.sql._
 
-import com.mysql.jdbc.exceptions.{MySQLSyntaxErrorException, MySQLIntegrityConstraintViolationException}
 import com.mysql.jdbc.exceptions._
 import org.h2.api.ErrorCode
 import org.joda.time.{DateTime, DateTimeZone}
