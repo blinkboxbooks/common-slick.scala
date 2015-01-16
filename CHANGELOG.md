@@ -1,5 +1,13 @@
 # Change log
 
+## 0.3.4 ([#10](https://git.mobcastdev.com/Platform/common-slick/pull/10) 2015-01-16 15:23:35)
+
+Add support for MySQL syntax exceptions
+
+patch 
+
+- Added support for `MySQLNonTransientException` and `SQLSyntaxErrorException` to default mysql filter. This is the exception you get when a table doesn't exist, or the database is not connectable. 
+
 ## 0.3.3 ([#9](https://git.mobcastdev.com/Platform/common-slick/pull/9) 2014-12-02 11:18:41)
 
 Updated build file & dependencies
