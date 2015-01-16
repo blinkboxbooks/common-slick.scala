@@ -1,6 +1,6 @@
 package com.blinkbox.books.slick
 
-import java.sql.{SQLSyntaxErrorException, BatchUpdateException, SQLIntegrityConstraintViolationException, SQLException}
+import java.sql._
 
 import com.mysql.jdbc.exceptions.{MySQLSyntaxErrorException, MySQLIntegrityConstraintViolationException}
 import com.mysql.jdbc.exceptions._
@@ -99,7 +99,7 @@ class MySQLDatabaseSupport extends DatabaseSupport {
     case ex: SQLIntegrityConstraintViolationException => ConstraintException(ex)
     case ex: BatchUpdateException if ex.getCause != null && ex.getCause.isInstanceOf[SQLIntegrityConstraintViolationException] => ConstraintException(ex)
     case ex: MySQLNonTransientException => UnknownDatabaseException(ex)
-    case ex: jdbc4.MySQLSyntaxErrorException => UnknownDatabaseException(ex)
+    case ex: SQLNonTransientException => UnknownDatabaseException(ex)
   }
 }
 
