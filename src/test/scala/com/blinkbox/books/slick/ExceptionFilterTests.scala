@@ -52,7 +52,7 @@ class ExceptionFilterTests extends FlatSpec with FailHelper {
       val cause = new MySQLSyntaxErrorException("test mysql syntax exception")
       mysqlDbSupport.throwEx(cause)
     }
-    assert(ex.getMessage == "com.mysql.jdbc.exceptions.MySQLNonTransientException: test mysql syntax exception")
+    assert(ex.getMessage == "test mysql syntax exception")
   }
 
   it should "work with java.sql.SQLSyntaxErrorException and subclasses" in new TestFixture {
