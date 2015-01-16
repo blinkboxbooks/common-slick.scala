@@ -98,8 +98,7 @@ class MySQLDatabaseSupport extends DatabaseSupport {
     case ex: MySQLIntegrityConstraintViolationException => ConstraintException(ex)
     case ex: SQLIntegrityConstraintViolationException => ConstraintException(ex)
     case ex: BatchUpdateException if ex.getCause != null && ex.getCause.isInstanceOf[SQLIntegrityConstraintViolationException] => ConstraintException(ex)
-    case ex: MySQLNonTransientException => UnknownDatabaseException(ex)
-    case ex: SQLNonTransientException => UnknownDatabaseException(ex)
+    case ex: SQLException => UnknownDatabaseException(ex)
   }
 }
 
