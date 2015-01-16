@@ -3,8 +3,8 @@ package com.blinkbox.books.slick
 import java.sql.SQLException
 
 import com.blinkbox.books.test.FailHelper
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException
 import com.mysql.jdbc.exceptions.jdbc4.{MySQLIntegrityConstraintViolationException => JDBC4MySQLIntegrityConstraintViolation}
+import com.mysql.jdbc.exceptions._
 import org.junit.runner.RunWith
 import org.scalatest.FlatSpec
 import org.scalatest.junit.JUnitRunner
@@ -45,6 +45,22 @@ class ExceptionFilterTests extends FlatSpec with FailHelper {
       mysqlDbSupport.throwEx(new BatchUpdateException(cause))
     }
     assert(ex.getMessage == "java.sql.SQLIntegrityConstraintViolationException: test sql exception")
+  }
+
+  it should "work with com.mysql.jdbc.exceptions.MySQLNonTransientException and subclasses" in new TestFixture {
+    val ex = intercept[UnknownDatabaseException] {
+      val cause = new MySQLSyntaxErrorException("test mysql syntax exception")
+      mysqlDbSupport.throwEx(cause)
+    }
+    assert(ex.getMessage == "com.mysql.jdbc.exceptions.MySQLNonTransientException: test mysql syntax exception")
+  }
+
+  it should "work with java.sql.SQLSyntaxErrorException and subclasses" in new TestFixture {
+    val ex = intercept[UnknownDatabaseException] {
+      val cause = new jdbc4.MySQLSyntaxErrorException("Table 'foo.bars' doesn't exist")
+      mysqlDbSupport.throwEx(cause)
+    }
+    assert(ex.getMessage == "Table 'foo.bars' doesn't exist")
   }
 
   class TestFixture extends DatabaseSupport {
